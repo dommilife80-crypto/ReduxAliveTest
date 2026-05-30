@@ -623,11 +623,19 @@ class XHR_v4dBj2ayea9a5_Inst {
     // Формируем реальный адрес сервера (wss://IP:PORT)
     const realUrl = drawMinimapInterval + AxisLockThreshold;
     
-    // Подключаемся к локальному прокси (ws://localhost:3000/ws)
-    // Он перешлет данные на realUrl и подменит заголовки
-    const proxyUrl = "ws://" + window.location.host + "/ws?target=" + encodeURIComponent(realUrl);
+    // Для GitHub Pages - подключаемся напрямую к серверу через WSS
+    // Для локального сервера - используем прокси
+    let proxyUrl;
+    if (window.location.protocol === 'https:') {
+        // GitHub Pages - прямое подключение
+        proxyUrl = realUrl;
+        console.log("Direct Game Connection (HTTPS):", proxyUrl);
+    } else {
+        // Локальный сервер - через прокси
+        proxyUrl = "ws://" + window.location.host + "/ws?target=" + encodeURIComponent(realUrl);
+        console.log("Proxy Game Connection (HTTP):", proxyUrl);
+    }
 
-    console.log("Proxy Game Connection:", proxyUrl);
     this.socket = new WebSocket(proxyUrl);
     // --- FIX END ---
 
