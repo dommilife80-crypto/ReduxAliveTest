@@ -5306,7 +5306,7 @@ async function NeweNPdm() {
   const SKIN_LOAD_STATUS = async (AxisLockThreshold) => {
     const minimapSmoothFactor = ["Beta", "Anubis"];
     const drawMinimapInterval = await fetch(
-      "/api/v1/utilities/servers.json"
+      "https://dommilife80-crypto.github.io/ReduxAliveTest/src/api/v1/utilities/servers.json"
     );
     const baseCellSize = await drawMinimapInterval.json();
     Logger.info("Fetched Servers", baseCellSize);
